@@ -1,6 +1,6 @@
 I don't like big bloated libraries and conglomerations.  These are some of the projects I've started, many of which are maintained by a community of like-minded individuals, DM me at `cnlohr` for an invite to our discord server:
 
-Single-file header libraries:
+Single-file <IMG SRC=https://github.com/user-attachments/assets/a4a1f72d-1510-4e19-9e6c-5b1b0e32ca9f> header libraries:
  * [<IMG SRC=http://cnvr.io/d/ghsai.cgi?cntools/rawdraw&6>rawdraw](https://github.com/cnlohr/rawdraw) - graphics (Opengl/Raw) and input for Android, WASM, Windows, Linux without the bloat
  * [<IMG SRC=http://cnvr.io/d/ghsai.cgi?cnlohr/mini-rv32ima&6>mini-rv32ima](https://github.com/cnlohr/mini-rv32ima) - RISC-V emulator in about 1,000 lines of code.  Able to boot Linux.
  * [<IMG SRC=http://cnvr.io/d/ghsai.cgi?cnlohr/sfhip&6>sfhip](https://github.com/cnlohr/sfhip) - Extremely memory tight immediate mode IP library for IPv4, TCP/IP, UDP, ARP, and DHCP.
