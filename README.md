@@ -1,8 +1,8 @@
 I don't like big bloated libraries and conglomerations.  These are some of the projects I've started, many of which are maintained by a community of like-minded individuals, DM me at `cnlohr` for an invite to our discord server:
 
 Single-file header libraries:
- * [<IMG SRC=http://cnvr.io/d/ghsai.cgi?cntools/rawdraw&4>rawdraw](https://github.com/cnlohr/rawdraw) - graphics and input for Android, WASM, Windows, Linux in one header file. (Supports raw and OpenGL)
- * [<IMG SRC=http://cnvr.io/d/ghsai.cgi?cnlohr/mini-rv32ima&4>mini-rv32ima](https://github.com/cnlohr/mini-rv32ima) - a RISC-V emulator in a single header file, written in very basic C, easily portable to other languages and environments, sufficient for booting Linux in a VM.  Comes with a basic Linux kernel.
+ * [<IMG SRC=http://cnvr.io/d/ghsai.cgi?cntools/rawdraw&4>rawdraw](https://github.com/cnlohr/rawdraw) - graphics (Opengl/Raw) and input for Android, WASM, Windows, Linux without the bloat
+ * [<IMG SRC=http://cnvr.io/d/ghsai.cgi?cnlohr/mini-rv32ima&4>mini-rv32ima](https://github.com/cnlohr/mini-rv32ima) - RISC-V emulator in about 1,000 lines of code.  Able to boot Linux.
  * [<IMG SRC=http://cnvr.io/d/ghsai.cgi?cnlohr/sfhip&4>sfhip](https://github.com/cnlohr/sfhip) - Extremely memory tight immediate mode IP library for IPv4, TCP/IP, UDP, ARP, and DHCP.
  * [<IMG SRC=http://cnvr.io/d/ghsai.cgi?cnlohr/fix32_fft&4>fix32_fft](https://github.com/cnlohr/fix32_fft) - modern C fixed-point FFT library geared for 32-bit systems, like ARM and RISC-V.
  * [<IMG SRC=http://cnvr.io/d/ghsai.cgi?cnlohr/vpxcoding&4>vpxcoding](https://github.com/cnlohr/vpxcoding) - VPX arithmatic coding library for heavy compression with a tiny code/memory footprint/overhead.
