@@ -14,7 +14,7 @@ Single-file header libraries:
 
 Other libraries / tools:
  * [<IMG SRC=http://cnvr.io/d/ghsai.cgi?cnlohr/ch32fun&4>ch32fun](https://github.com/cnlohr/ch32fun) - ch32v microcontroller build system, targeting compactness, development speed and openness
- * [<IMG SRC=http://cnvr.io/d/ghsai.cgi?cnlohr/rawdrawandroid&4>rawdrawandroid](https://github.com/cnlohr/rawdrawandroid) - build graphical applications for Android in C, no Java, no android studio.  Just some C code and a Makefile.  Build/testing times are around 1 second to do a full test.  Applications are only a few kB.
+ * [<IMG SRC=http://cnvr.io/d/ghsai.cgi?cnlohr/rawdrawandroid&4>rawdrawandroid](https://github.com/cnlohr/rawdrawandroid) - build android apps in c, without any java, with 1 second development cycles.
  * [<IMG SRC=http://cnvr.io/d/ghsai.cgi?cnlohr/h264fun&4>h264fun](https://github.com/cnlohr/h264fun) - Raw PCM H.264 video encoding streams with support for RTMP and RTSP.
  * [<IMG SRC=http://cnvr.io/d/ghsai.cgi?cnlohr/lamenet&4>lamenet](https://github.com/cnlohr/lamenet) - bad network simulator, to simulate a bad network connection
  * [<IMG SRC=http://cnvr.io/d/ghsai.cgi?cnlohr/coefficient_decompose_calculator&4>coefficient decompose calculator](https://github.com/cnlohr/coefficient_decompose_calculator) - Compute constant multiply and divides decomposed into optimal and minimal bit shifts.
