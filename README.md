@@ -13,7 +13,7 @@ Single-file <IMG SRC=https://github.com/user-attachments/assets/1dd32295-869d-4d
  * [<IMG SRC=http://cnvr.io/d/ghsai.cgi?cnlohr/tsopenxr&6>tsopenxr](https://github.com/cnlohr/tsopenxr) - Everything needed to build OpenXR VR apps for PC or Quest in one header file
  * [<IMG SRC=http://cnvr.io/d/ghsai.cgi?cnlohr/csgp4&6>csgp4](https://github.com/cnlohr/csgp4) - single-precision, SGP4 orbital mechanis for shaders or microcontrollers
 
-Other <IMG SRC=https://github.com/user-attachments/assets/1dd32295-869d-4d0f-8045-6e53bf7e916c> libraries and tools:
+Other libraries and tools:
  * [<IMG SRC=http://cnvr.io/d/ghsai.cgi?cnlohr/ch32fun&6>ch32fun](https://github.com/cnlohr/ch32fun) - ch32v microcontroller build system, targeting compactness, development speed and openness
  * [<IMG SRC=http://cnvr.io/d/ghsai.cgi?cnlohr/rawdrawandroid&6>rawdrawandroid](https://github.com/cnlohr/rawdrawandroid) - build android apps in c, without any java, with 1 second development cycles
  * [<IMG SRC=http://cnvr.io/d/ghsai.cgi?cnlohr/h264fun&6>h264fun](https://github.com/cnlohr/h264fun) - Raw PCM H.264 video encoding streams with support for RTMP and RTSP
@@ -26,6 +26,7 @@ Other <IMG SRC=https://github.com/user-attachments/assets/1dd32295-869d-4d0f-804
  * [<IMG SRC=http://cnvr.io/d/ghsai.cgi?cnlohr/nosdk8266&6>nosdk8266](https://github.com/nosdk8266) - Extremely lightweight ESP8266 SDK
  * [<IMG SRC=http://cnvr.io/d/ghsai.cgi?cnlohr/pi_tpi&6>pi_tpi](https://github.com/pi_tpi) - AVR TPI programming interface for Raspberry Pi GPIO
  * [<IMG SRC=http://cnvr.io/d/ghsai.cgi?cnlohr/x32-ws2812-usbhs-breakout&6>x32-ws2812-usbhs-breakout](https://github.com/x32-ws2812-usbhs-breakout) - 32-simultaneous-output WS2812B driver using USB HS
+ * [<IMG SRC=http://cnvr.io/d/ghsai.cgi?cnlohr/cilbox&6>cilbox](https://github.com/cilbox) - C# CIL emulator/scripting sandbox for unity, focused on speed and simplicity
 
 Various demos:
  * [<IMG SRC=http://cnvr.io/d/ghsai.cgi?cnlohr/channel3&6>channel3](https://github.com/cnlohr/channel3) - NTSC/PAL VHF video transmission from the ESP8266 via IO pins
