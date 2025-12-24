@@ -17,7 +17,7 @@ Other libraries / tools:
  * [<IMG SRC=http://cnvr.io/d/ghsai.cgi?cnlohr/rawdrawandroid&6>rawdrawandroid](https://github.com/cnlohr/rawdrawandroid) - build android apps in c, without any java, with 1 second development cycles.
  * [<IMG SRC=http://cnvr.io/d/ghsai.cgi?cnlohr/h264fun&6>h264fun](https://github.com/cnlohr/h264fun) - Raw PCM H.264 video encoding streams with support for RTMP and RTSP.
  * [<IMG SRC=http://cnvr.io/d/ghsai.cgi?cnlohr/lamenet&6>lamenet](https://github.com/cnlohr/lamenet) - bad network simulator, to simulate a bad network connection
- * [<IMG SRC=http://cnvr.io/d/ghsai.cgi?cnlohr/coefficient_decompose_calculator&6>coefficient decompose calculator](https://github.com/cnlohr/coefficient_decompose_calculator) - Compute constant multiplies decomposed into optimal/minimal bit shifts.
+ * [<IMG SRC=http://cnvr.io/d/ghsai.cgi?cnlohr/coefficient_decompose_calculator&6>coefficient decompose calculator](https://github.com/cnlohr/coefficient_decompose_calculator) - Compute constant multiplies decomposed to optimal/minimal bit shifts.
  * [<IMG SRC=http://cnvr.io/d/ghsai.cgi?cnlohr/microclockoptimizer&6>microclockoptimizer](https://github.com/cnlohr/microclockoptimizer) - clock tree calculator / solver for computing microcontroller clock trees
  * [<IMG SRC=http://cnvr.io/d/ghsai.cgi?cntools/cnping&6>cnping](https://github.com/cntools/cnping) - monitor live network conditions, gain insights about poor network performance in realtime.
  * [<IMG SRC=http://cnvr.io/d/ghsai.cgi?cnlohr/colorchord&6>colorchord](https://github.com/colorchord) - realtime chromatic sound-to-color conversion.
