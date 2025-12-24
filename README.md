@@ -27,37 +27,36 @@ Other libraries / tools:
  * [<IMG SRC=http://cnvr.io/d/ghsai.cgi?cnlohr/x32-ws2812-usbhs-breakout&6>x32-ws2812-usbhs-breakout](https://github.com/x32-ws2812-usbhs-breakout) - 32-simultaneous-output WS2812B driver using USB HS
 
 Various demos:
- * [<IMG SRC=http://cnvr.io/d/ghsai.cgi?cnlohr/channel3&6>channel3](https://github.com/cnlohr/channel3) - transmit NTSC or PAL video signals from the ESP8266, via the I2S bus in RF at 62.5MHz from a framebuffer.
+ * [<IMG SRC=http://cnvr.io/d/ghsai.cgi?cnlohr/channel3&6>channel3](https://github.com/cnlohr/channel3) - NTSC/PAL VHF video transmission from the ESP8266 via IO pins
  * [<IMG SRC=http://cnvr.io/d/ghsai.cgi?cnlohr/espusb&6>espusb](https://github.com/cnlohr/espusb) - use the esp8266 as a USB device, by bit-banging GPIOs to enumerate as a low-speed USB device.
- * [<IMG SRC=http://cnvr.io/d/ghsai.cgi?cnlohr/rv003usb&6>rv003usb](https://github.com/cnlohr/rv003usb) - use the ch32v003, a 10¢ RISC-V microcontroller as a low-speed USB device, fully-featured with CRC, KA, enumeration and a wide variety of examples.
+ * [<IMG SRC=http://cnvr.io/d/ghsai.cgi?cnlohr/rv003usb&6>rv003usb](https://github.com/cnlohr/rv003usb) - Bit bang USB low-speed on the ch32v003 (fully featured)
  * [<IMG SRC=http://cnvr.io/d/ghsai.cgi?cnlohr/ch32v003_3digit_lcd_usb&6>ch32v003_3digit_lcd_usb](https://github.com/cnlohr/ch32v003_3digit_lcd_usb) - bit banged 3-digit LCD driver for the ch32v003.
  * [<IMG SRC=http://cnvr.io/d/ghsai.cgi?cnlohr/oledscope&6>oledscope](https://github.com/cnlohr/oledscope) - using OLED displays as 15kPPS vector scope
- * [<IMG SRC=http://cnvr.io/d/ghsai.cgi?cnlohr/ch32v00x_ntsc&6>ch32v00x_ntsc](https://github.com/cnlohr/ch32v00x_ntsc) - use a ch32v003 or 006 to output NTSC, very jankily, doesn't work with digital tuners, but works great on old tube TVs!
- * [<IMG SRC=http://cnvr.io/d/ghsai.cgi?cnlohr/lolra&6>lolra](https://github.com/cnlohr/lolra) - send LoRA RF frames at 900MHz, and other RF signals at other frequencies, by either bit-banging, SPI, I2S or APLL outputs on processors without using proper radios.
- * [<IMG SRC=http://cnvr.io/d/ghsai.cgi?cnlohr/airspydump&6>airspydump](https://github.com/cnlohr/airspydump) - tool for dumping windows of time in the RF spectrum, for deep introspection and analysis of RF radio sginals.  Also home of the extremely narrow time RF waterfall view.
+ * [<IMG SRC=http://cnvr.io/d/ghsai.cgi?cnlohr/ch32v00x_ntsc&6>ch32v00x_ntsc](https://github.com/cnlohr/ch32v00x_ntsc) - NTSC composite output on ch32v003/006, may not work on digital TVs.
+ * [<IMG SRC=http://cnvr.io/d/ghsai.cgi?cnlohr/lolra&6>lolra](https://github.com/cnlohr/lolra) - Broadcast 900MHz LoRA messages on microcontrollers without using radios over a kilometer
+ * [<IMG SRC=http://cnvr.io/d/ghsai.cgi?cnlohr/airspydump&6>airspydump](https://github.com/cnlohr/airspydump) - Dumping raw IQ samples from AirSpy SDRs for narrow time analysis.
  * Badder Apple (TODO)
- * [<IMG SRC=http://cnvr.io/d/ghsai.cgi?cnlohr/rtl8153_userspace&6>rtl8153_userspace](https://github.com/cnlohr/rtl8153_userspace) - use the RTL8153, a Realtek ethernet USB chip directly from userspace without a kernel network interace. Useful for things like creating a VPN to a cell phone unknown to the cell phone's host OS.
+ * [<IMG SRC=http://cnvr.io/d/ghsai.cgi?cnlohr/rtl8153_userspace&6>rtl8153_userspace](https://github.com/cnlohr/rtl8153_userspace) - RTL8153, GbE to USB via userspace from Linux or Android for raw packet access
  * [<IMG SRC=http://cnvr.io/d/ghsai.cgi?cnlohr/cnixxi&6>cnixxi](https://github.com/cnlohr/cnixxi) - use a ch32v003 as a high-voltage flyback and control a nixie tube, with PWM digitally.
- * [<IMG SRC=http://cnvr.io/d/ghsai.cgi?cnlohr/esp32s2-cookbook&6>esp32s2-cookbook](https://github.com/cnlohr/esp32s2-cookbook) - experiments with the esp32-s2, from extreme overclocking, running from RAM exclusively, operating as a slave processor, and ultra fast development cycle times to explore hardware, along with acting as RISC-V programmer.
- * [<IMG SRC=http://cnvr.io/d/ghsai.cgi?cnlohr/ch32v003_3digit_lcd_usb&6>ch32v003_3digit_lcd_usb](https://github.com/cnlohr/ch32v003_3digit_lcd_usb) - demo showing how to control discrete LCD arrays with GPIOs, without the need for a LCD controller.
+ * [<IMG SRC=http://cnvr.io/d/ghsai.cgi?cnlohr/esp32s2-cookbook&6>esp32s2-cookbook](https://github.com/cnlohr/esp32s2-cookbook) - esp32-s2 experiments + tools and non-IDF sdk
  * [<IMG SRC=http://cnvr.io/d/ghsai.cgi?cnlohr/ethertiny&6>ethertiny](https://github.com/cnlohr/ethertiny) - bit bang ethernet Base 10-T on an attiny85.
  * [<IMG SRC=http://cnvr.io/d/ghsai.cgi?cnlohr/ch32v00x_ntsc&6>ch32v00x_ntsc](https://github.com/cnlohr/ch32v00x_ntsc) - software bit bang NTSC video with the ch32v003 or 006
  * [<IMG SRC=http://cnvr.io/d/ghsai.cgi?cnlohr/starcounter&6>starcounter](https://github.com/cnlohr/starcounter) - example using olive, ffmpeg and github APIs to animate user's stargazers over time
 
 Documentation:
- * [<IMG SRC=http://cnvr.io/d/ghsai.cgi?cnlohr/cnlohr_tricks&6>cnlohr_tricks](https://github.com/cnlohr/cnlohr_tricks) - various tricks and things I've learned over the years about electronics, programming and engineering.
+ * [<IMG SRC=http://cnvr.io/d/ghsai.cgi?cnlohr/cnlohr_tricks&6>cnlohr_tricks](https://github.com/cnlohr/cnlohr_tricks) - tricks&tricks I've learned over the years about electronics, programming and engineering.
  * [<IMG SRC=http://cnvr.io/d/ghsai.cgi?cnlohr/cntools&6>cntools](https://github.com/cnlohr/cntools) - my incomplete library for various header-only and other libraries.  (Mostly uncategorized)
- * [<IMG SRC=http://cnvr.io/d/ghsai.cgi?cnlohr/cnhardware&6>cnhardware](https://github.com/cnlohr/cnhardware) - a wide variety of mostly unfinished hardware and firmware projects for an array of processors and tests.  Comes with a big kicad library. (Mostly uncategorized)
+ * [<IMG SRC=http://cnvr.io/d/ghsai.cgi?cnlohr/cnhardware&6>cnhardware](https://github.com/cnlohr/cnhardware) - kicad footprints and all my random hardware projects
  * [<IMG SRC=http://cnvr.io/d/ghsai.cgi?cnlohr/halnoslides&6>halnoslides](https://github.com/cnlohr/halnoslides) - my talk on how to write a embedded development environment from scratch.
  * [<IMG SRC=http://cnvr.io/d/ghsai.cgi?cnlohr/shadertrixx&6>shadertrixx](https://github.com/cnlohr/shadertrixx) - lots of discussion on writing shaders for unity.
- * [<IMG SRC=http://cnvr.io/d/ghsai.cgi?cnlohr/lolra_talk&6>Radios are just Microcontrollers in disguise](https://cnlohr.github.io/lolra_talk/) - my 2024 Hackaday talk on sending and receiving RF signals with microcontrollers without radio hardware.
+ * [<IMG SRC=http://cnvr.io/d/ghsai.cgi?cnlohr/lolra_talk&6>Radios are just Microcontrollers in disguise](https://cnlohr.github.io/lolra_talk/) - my 2024 Hackaday talk on sending and receiving RF signals without radios
  * [<IMG SRC=http://cnvr.io/d/ghsai.cgi?cnlohr/assembly-notes&6>CNLohr's Assembly Notes](https://github.com/cnlohr/assembly-notes) - My assembly notes (also from my 2022 Hackaday talk)
 
 VR/Graphics
  * [<IMG SRC=http://cnvr.io/d/ghsai.cgi?cnlohr/voxeltastic&6>voxeltastic](https://github.com/cnlohr/voxeltastic) - render 3D volumes with path tracing in-browser, or in vr!
  * [<IMG SRC=http://cnvr.io/d/ghsai.cgi?cnlohr/cnovr&6>cnovr](https://github.com/cnlohr/cnovr) - an OpenVR playground with hot-compile-and-reload code.
- * [<IMG SRC=http://cnvr.io/d/ghsai.cgi?cnlohr/vrc-rv32ima&6>vrc-rv32ima](https://github.com/cnlohr/vrc-rv32ima) - a HLSL implementation of mini-rv32ima, geared for emulating RISC-V processors in shaders on VR social platforms.
- * [<IMG SRC=http://cnvr.io/d/ghsai.cgi?cnlohr/openvr_overlay_model&6>openvr_overlay_model](https://github.com/cnlohr/openvr_overlay_model) - a HLSL implementation of mini-rv32ima, geared for emulating RISC-V processors in shaders on VR social platforms.
+ * [<IMG SRC=http://cnvr.io/d/ghsai.cgi?cnlohr/vrc-rv32ima&6>vrc-rv32ima](https://github.com/cnlohr/vrc-rv32ima) - a HLSL implementation of mini-rv32ima, to emulate processors in shaders on VRChat.
+ * [<IMG SRC=http://cnvr.io/d/ghsai.cgi?cnlohr/openvr_overlay_model&6>openvr_overlay_model](https://github.com/cnlohr/openvr_overlay_model) - openvr stereo overlay example
  * [<IMG SRC=http://cnvr.io/d/ghsai.cgi?cnlohr/openvr-screengrab&6>openvr-screengrab](https://github.com/cnlohr/openvr-screengrab) - minimal example to create DirectX contexts in pure C and grab SteamVR screengrabs.
  * [<IMG SRC=http://cnvr.io/d/ghsai.cgi?cnlohr/slapsplat&6>slapsplat](https://github.com/cnlohr/slapsplat) - VRChat-friendly Gaussian Splat renderer for VR, using ordinal sorting.
 
