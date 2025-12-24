@@ -5,7 +5,7 @@ Single-file header libraries:
  * [<IMG SRC=http://cnvr.io/d/ghsai.cgi?cnlohr/mini-rv32ima&5>mini-rv32ima](https://github.com/cnlohr/mini-rv32ima) - RISC-V emulator in about 1,000 lines of code.  Able to boot Linux.
  * [<IMG SRC=http://cnvr.io/d/ghsai.cgi?cnlohr/sfhip&5>sfhip](https://github.com/cnlohr/sfhip) - Extremely memory tight immediate mode IP library for IPv4, TCP/IP, UDP, ARP, and DHCP.
  * [<IMG SRC=http://cnvr.io/d/ghsai.cgi?cnlohr/fix32_fft&5>fix32_fft](https://github.com/cnlohr/fix32_fft) - modern C fixed-point FFT library geared for 32-bit systems, like ARM and RISC-V.
- * [<IMG SRC=http://cnvr.io/d/ghsai.cgi?cnlohr/vpxcoding&5>vpxcoding](https://github.com/cnlohr/vpxcoding) - VPX arithmatic coding library for heavy compression with a tiny code/memory footprint/overhead.
+ * [<IMG SRC=http://cnvr.io/d/ghsai.cgi?cnlohr/vpxcoding&5>vpxcoding](https://github.com/cnlohr/vpxcoding) - VPX arithmatic coding library for bit compression with a tiny code/memory footprint.
  * [<IMG SRC=http://cnvr.io/d/ghsai.cgi?cnlohr/cnrbtree&5>cnrbtree](https://github.com/cnlohr/cnrbtree) - Basically a c++ `<map>` or Dictionary in C, as a single file header.
  * [<IMG SRC=http://cnvr.io/d/ghsai.cgi?cnlohr/heatshrink-sfh&5>heatshrink-sfh](https://github.com/cnlohr/heatshrink-sfh) - Extremely simple implemenation of heatshrink for decompressing data in <600 bytes.
  * [<IMG SRC=http://cnvr.io/d/ghsai.cgi?cnlohr/rtgz-tinf-util&5>rtgz-tinf-util](https://github.com/cnlohr/rtgz-tinf-util) - Very small port of tinfl, a gzip decompressor in a header only library.
@@ -17,7 +17,7 @@ Other libraries / tools:
  * [<IMG SRC=http://cnvr.io/d/ghsai.cgi?cnlohr/rawdrawandroid&5>rawdrawandroid](https://github.com/cnlohr/rawdrawandroid) - build android apps in c, without any java, with 1 second development cycles.
  * [<IMG SRC=http://cnvr.io/d/ghsai.cgi?cnlohr/h264fun&5>h264fun](https://github.com/cnlohr/h264fun) - Raw PCM H.264 video encoding streams with support for RTMP and RTSP.
  * [<IMG SRC=http://cnvr.io/d/ghsai.cgi?cnlohr/lamenet&5>lamenet](https://github.com/cnlohr/lamenet) - bad network simulator, to simulate a bad network connection
- * [<IMG SRC=http://cnvr.io/d/ghsai.cgi?cnlohr/coefficient_decompose_calculator&5>coefficient decompose calculator](https://github.com/cnlohr/coefficient_decompose_calculator) - Compute constant multiplies decomposed into optimal and minimal bit shifts.
+ * [<IMG SRC=http://cnvr.io/d/ghsai.cgi?cnlohr/coefficient_decompose_calculator&5>coefficient decompose calculator](https://github.com/cnlohr/coefficient_decompose_calculator) - Compute constant multiplies decomposed into optimal/minimal bit shifts.
  * [<IMG SRC=http://cnvr.io/d/ghsai.cgi?cnlohr/microclockoptimizer&5>microclockoptimizer](https://github.com/cnlohr/microclockoptimizer) - clock tree calculator / solver for computing microcontroller clock trees
  * [<IMG SRC=http://cnvr.io/d/ghsai.cgi?cntools/cnping&5>cnping](https://github.com/cntools/cnping) - monitor live network conditions, gain insights about poor network performance in realtime.
  * [<IMG SRC=http://cnvr.io/d/ghsai.cgi?cnlohr/colorchord&5>colorchord](https://github.com/colorchord) - realtime chromatic sound-to-color conversion.
