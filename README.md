@@ -49,7 +49,7 @@ Documentation:
  * [<IMG SRC=http://cnvr.io/d/ghsai.cgi?cnlohr/cnhardware&6>cnhardware](https://github.com/cnlohr/cnhardware) - kicad footprints and all my random hardware projects
  * [<IMG SRC=http://cnvr.io/d/ghsai.cgi?cnlohr/halnoslides&6>halnoslides](https://github.com/cnlohr/halnoslides) - my talk on how to write a embedded development environment from scratch.
  * [<IMG SRC=http://cnvr.io/d/ghsai.cgi?cnlohr/shadertrixx&6>shadertrixx](https://github.com/cnlohr/shadertrixx) - lots of discussion on writing shaders for unity.
- * [<IMG SRC=http://cnvr.io/d/ghsai.cgi?cnlohr/lolra_talk&6>Radios are just Microcontrollers in disguise](https://cnlohr.github.io/lolra_talk/) - my 2024 Hackaday talk on sending and receiving RF signals without radios
+ * [<IMG SRC=http://cnvr.io/d/ghsai.cgi?cnlohr/lolra_talk&6>Radios are just Microcontrollers in disguise](https://cnlohr.github.io/lolra_talk/) - Hackaday talk on TX _and_ RX RF signals without radios
  * [<IMG SRC=http://cnvr.io/d/ghsai.cgi?cnlohr/assembly-notes&6>CNLohr's Assembly Notes](https://github.com/cnlohr/assembly-notes) - My assembly notes (also from my 2022 Hackaday talk)
 
 VR/Graphics
