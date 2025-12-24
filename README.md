@@ -1,4 +1,4 @@
-I don't like big bloated libraries and conglomerations.  These are some of the projects I've started, many of which are maintained by a community of like-minded individuals, DM me at `cnlohr` for an invite to our discord server:
+These are some of the projects I've started, with an eye on minimizing complexity of the whole tech stack, many of which are maintained by a community of like-minded individuals, DM me at `cnlohr` for an invite to our discord server:
 
 Single-file <IMG SRC=https://github.com/user-attachments/assets/1dd32295-869d-4d0f-8045-6e53bf7e916c> header libraries:
  * [<IMG SRC=http://cnvr.io/d/ghsai.cgi?cntools/rawdraw&6>rawdraw](https://github.com/cnlohr/rawdraw) - graphics (Opengl/Raw) and input for Android, WASM, Windows, Linux without the bloat
