@@ -68,5 +68,4 @@ While I cannot accept donations, favors or work at the moment, your money may go
 
 * MonteMonte for their continued work on ch32fun and supporting projects [Kofi Link](https://ko-fi.com/montemonte)
 * iakat for their work on [adsb.lol](https://adsb.lol), and open ADSB platform. [Github Sponsorship](https://github.com/iakat)
-* Dooly123 for their contined work [Basis](https://basisvr.org/), an open source VR social framework.
-
+* Dooly123 for their continued work on [Basis](https://basisvr.org/), an open source VR social framework
