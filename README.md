@@ -37,7 +37,7 @@ Various demos:
  * [<IMG SRC=http://cnvr.io/d/ghsai.cgi?cnlohr/ch32v00x_ntsc&6>ch32v00x_ntsc](https://github.com/cnlohr/ch32v00x_ntsc) - NTSC composite output on ch32v003/006, may not work on digital TVs
  * [<IMG SRC=http://cnvr.io/d/ghsai.cgi?cnlohr/lolra&6>lolra](https://github.com/cnlohr/lolra) - Broadcast 900MHz LoRA messages on microcontrollers without using radios over a kilometer
  * [<IMG SRC=http://cnvr.io/d/ghsai.cgi?cnlohr/airspydump&6>airspydump](https://github.com/cnlohr/airspydump) - Dumping raw IQ samples from AirSpy SDRs for narrow time analysis
- * Badder Apple (TODO)
+ * [<IMG SRC=http://cnvr.io/d/ghsai.cgi?cnlohr/badderapple&6>badderapple](https://github.com/cnlohr/badderapple) - Bad Apple in 62.5kB
  * [<IMG SRC=http://cnvr.io/d/ghsai.cgi?cnlohr/rtl8153_userspace&6>rtl8153_userspace](https://github.com/cnlohr/rtl8153_userspace) - RTL8153, GbE to USB via userspace from Linux or Android for raw packet access
  * [<IMG SRC=http://cnvr.io/d/ghsai.cgi?cnlohr/cnixxi&6>cnixxi](https://github.com/cnlohr/cnixxi) - use a ch32v003 as a high-voltage flyback and control a nixie tube, with PWM digitally
  * [<IMG SRC=http://cnvr.io/d/ghsai.cgi?cnlohr/esp32s2-cookbook&6>esp32s2-cookbook](https://github.com/cnlohr/esp32s2-cookbook) - esp32-s2 experiments + tools and non-IDF sdk
