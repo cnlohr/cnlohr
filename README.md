@@ -25,7 +25,7 @@ Other libraries and tools:
  * [<IMG SRC=http://cnvr.io/d/ghsai.cgi?cnlohr/minimdnsd&6>minimdnsd](https://github.com/minimdnsd) - small, ultra low overhead Linux MDNS server
  * [<IMG SRC=http://cnvr.io/d/ghsai.cgi?cnlohr/nosdk8266&6>nosdk8266](https://github.com/nosdk8266) - Extremely lightweight ESP8266 SDK
  * [<IMG SRC=http://cnvr.io/d/ghsai.cgi?cnlohr/pi_tpi&6>pi_tpi](https://github.com/pi_tpi) - AVR TPI programming interface for Raspberry Pi GPIO
- * [<IMG SRC=http://cnvr.io/d/ghsai.cgi?cnlohr/x32-ws2812-usbhs-breakout&6>x32-ws2812-usbhs-breakout](https://github.com/x32-ws2812-usbhs-breakout) - 32-simultaneous-output WS2812B driver using USB HS
+ * [<IMG SRC=http://cnvr.io/d/ghsai.cgi?cnlohr/x32-ws2812-usbhs-breakout&6>x32-ws2812-usbhs-breakout](https://github.com/cnlohr/x32-ws2812-usbhs-breakout) - 32-simultaneous-output WS2812B driver using USB HS
  * [<IMG SRC=http://cnvr.io/d/ghsai.cgi?cnlohr/cilbox&6>cilbox](https://github.com/cilbox) - C# CIL emulator/scripting sandbox for unity, focused on speed and simplicity
 
 Various demos:
