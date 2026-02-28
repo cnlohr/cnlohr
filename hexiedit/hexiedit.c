@@ -57,9 +57,9 @@ void HandleButton( int x, int y, int button, int bDown )
 		if( down == 1 )
 		{
 			int c;
-			for( c = 0; c < colorQueueLength; c++ )
+			for( c = 0; c < colorQueueLength-1; c++ )
 				colorQueue[c] = colorQueue[c+1];
-			colorQueue[c-1] = 0xff | (rand()<<8);
+			colorQueue[c] = 0xff | (rand()<<8);
 		}
 		down = 0;
 	}
