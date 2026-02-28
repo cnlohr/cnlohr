@@ -13,6 +13,8 @@
 int lmx, lmy;
 int down = 0;
 int slot = 0;
+int colorQueueLength = 50;
+uint32_t colorQueue[50];
 
 void LoadIndex();
 void SaveImage();
@@ -39,8 +41,28 @@ void HandleButton( int x, int y, int button, int bDown )
 {
 	lmx = x;
 	lmy = y;
-	if( bDown ) down = (button == 0 )?1:2;
-	if( !bDown ) down = 0;
+	if( bDown )
+	{
+		if( button = 0 )
+		{
+			down = 1;
+		}
+		else
+		{
+			down = 2;
+		}
+	}
+	if( !bDown )
+	{
+		if( down == 1 )
+		{
+			int c;
+			for( c = 0; c < colorQueueLength; c++ )
+				colorQueue[c] = colorQueue[c+1];
+			colorQueue[c-1] = 0xff | (rand()<<8);
+		}
+		down = 0;
+	}
 }
 
 void HandleMotion( int x, int y, int mask )
@@ -151,17 +173,24 @@ void LoadIndex()
 	if( colors ) free( colors );
 
 	int n;
-	colors = (uint32_t*)stbi_load(fname, &imgw, &imgh, &n, 4);
-	if( n != 4 )
+	uint8_t * loadimg = (uint8_t*)stbi_load(fname, &imgw, &imgh, &n, 4);
+	if( n != 4 || loadimg == 0 )
 	{
-		fprintf( stderr, "Error: Need 4-components\n" );
-	}
-
-	if( !colors )
-	{
+		fprintf( stderr, "Error: Need a 4-component valid png.\n" );
 		imgw = 25;
 		imgh = 20;
 		colors = calloc( 4 * imgw * imgh, 1 );
+	}
+	else
+	{
+		colors = calloc( 4 * imgw * imgh, 1 );
+		int x, y;
+		for( y = 0; y < imgh; y++ )
+		for( x = 0; x < imgw; x++ )
+		{
+			colors[x+y*imgw] = 0xff | (loadimg[(x+y*imgw)*4+0]<<24) | ( loadimg[(x+y*imgw)*4+1]<<16) | ( loadimg[(x+y*imgw)*4+2]<<8);
+		}
+		free( loadimg );
 	}
 }
 
@@ -169,7 +198,18 @@ void SaveImage()
 {
 	char fname[64];
 	snprintf( fname, sizeof(fname), "%02d.png", slot );
-	int ret = stbi_write_png( fname, imgw, imgh, 4, colors, imgw*4);
+
+	uint32_t saveimg[imgw*imgh];
+	int x, y;
+	for( y = 0; y < imgh; y++ )
+	for( x = 0; x < imgw; x++ )
+	{
+		uint32_t c = colors[x+y*imgw];
+		saveimg[x+y*imgw] = 0xff000000 | (c>>24) | ((c>>8)&0xff00) | ((c<<8)&0xff0000);
+	}
+
+
+	int ret = stbi_write_png( fname, imgw, imgh, 4, saveimg, imgw*4);
 	printf( "Save: %d\n", ret );
 }
 
@@ -232,7 +272,7 @@ void DrawHex( hpoint hp, hoffsetcoord hc )
 	if( hit )
 	{
 		if( down == 1 )
-			colors[hc.col + hc.row * imgw] = ( rand() << 8) | 0xff;
+			colors[hc.col + hc.row * imgw] = colorQueue[0];
 		else if( down == 2 )
 			colors[hc.col + hc.row * imgw] = 0;
 	}
@@ -254,9 +294,13 @@ void DrawHex( hpoint hp, hoffsetcoord hc )
 
 int main()
 {
-	CNFGSetup( "Hexiedit", 1296, 1240 );
+	CNFGSetup( "Hexiedit", 1296, 1280 );
 
 	srand( OGGetAbsoluteTime() );
+
+	int c;
+	for( c = 0; c < colorQueueLength; c++ )
+		colorQueue[c] = 0xff | (rand()<<8);
 
 	LoadIndex();
 
@@ -274,18 +318,26 @@ int main()
 			hoffsetcoord hoc = (hoffsetcoord){ y, x };
 			hpoint hp = flat_hex_to_pixel( oddq_to_axial( hoc ) );
 			hp.x += 35;
-			hp.y += 45;
+			hp.y += 85;
 			DrawHex( hp, hoc );
+		}
+
+		int c = 0;
+		CNFGColor( 0 );
+		for( c = 0; c < colorQueueLength; c++ )
+		{
+			CNFGDialogColor = colorQueue[c];
+			CNFGDrawBox( c*40+1, 1, c*40+40, 40 );
 		}
 
 //		CNFGTackRectangle( xco+margin/2, yco+margin/2, xco+gsx, yco+gsy );
 
 		CNFGColor( 0xffffffff );
 		CNFGPenX = 1;
-		CNFGPenY = 1;
+		CNFGPenY = wy-15;
 		char cts[1024];
 		sprintf( cts, "slot: %02d n: next slot / p: previous slot / s: save / d: high res draw", slot );
-		CNFGDrawText( cts, 4 );
+		CNFGDrawText( cts, 3 );
 		CNFGSwapBuffers();
 	}
 	return 0;
