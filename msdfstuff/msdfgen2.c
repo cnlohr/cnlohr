@@ -11,21 +11,22 @@ stbtt_fontinfo font;
 int main()
 {
 	FILE * f = fopen( "wlmaru2004emojip.ttf", "rb" );
-	fseek( f, SEEK_END, 0 );
+	//FILE * f = fopen( "AudioLinkConsole-Bold.ttf", "rb" );
+	fseek( f, 0, SEEK_END );
 	int len = ftell( f );
-	fseek( f, SEEK_SET	, 0 );
-	uint8_t * ttf_buffer = malloc( len );
+	fseek( f, 0, SEEK_SET );
+	printf( "LEN: %d\n", len );
+	uint8_t * ttf_buffer = malloc( len + 1024 );
 	fread( ttf_buffer, 1, len, f );
 	fclose( f );
 
 	int c = 'A';
 
-	stbtt_InitFont(&font, ttf_buffer, stbtt_GetFontOffsetForIndex(ttf_buffer,0));
-
-	free( ttf_buffer );
+	int offset = stbtt_GetFontOffsetForIndex(ttf_buffer, 0);
+	int r = stbtt_InitFont(&font, ttf_buffer, offset);
 
 	int ascent;
-	float scale = stbtt_ScaleForPixelHeight(&font, 15);
+	float scale = stbtt_ScaleForPixelHeight(&font, 48);
 	stbtt_GetFontVMetrics(&font, &ascent,0,0);
 	int baseline = (int) (ascent*scale);
 
@@ -43,6 +44,9 @@ int main()
 			putchar(" .:ioVM@"[bitmap[j*w+i]>>5]);
 		putchar('\n');
 	}
+
+	free( ttf_buffer );
+
 	return 0;
 }
 
