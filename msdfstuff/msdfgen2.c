@@ -10,6 +10,8 @@ stbtt_fontinfo font;
 
 int main()
 {
+	int r;
+
 	FILE * f = fopen( "wlmaru2004emojip.ttf", "rb" );
 	//FILE * f = fopen( "AudioLinkConsole-Bold.ttf", "rb" );
 	fseek( f, 0, SEEK_END );
@@ -17,16 +19,21 @@ int main()
 	fseek( f, 0, SEEK_SET );
 	printf( "LEN: %d\n", len );
 	uint8_t * ttf_buffer = malloc( len + 1024 );
-	fread( ttf_buffer, 1, len, f );
+	r = fread( ttf_buffer, 1, len, f );
+	if( r < 1 )
+	{
+		fprintf( stderr, "Error: Could not read file\n" );
+		return -5;
+	}
 	fclose( f );
 
-	int c = 'A';
+	int c = L'は';//'c';
 
 	int offset = stbtt_GetFontOffsetForIndex(ttf_buffer, 0);
-	int r = stbtt_InitFont(&font, ttf_buffer, offset);
+	r = stbtt_InitFont(&font, ttf_buffer, offset);
 
 	int ascent;
-	float scale = stbtt_ScaleForPixelHeight(&font, 48);
+	float scale = stbtt_ScaleForPixelHeight(&font, 96);
 	stbtt_GetFontVMetrics(&font, &ascent,0,0);
 	int baseline = (int) (ascent*scale);
 
@@ -38,12 +45,13 @@ int main()
 	int w,h,i,j;
 
 	bitmap = stbtt_GetCodepointBitmap(&font, 0, scale, c, &w, &h, 0,0);
-	printf( "Codepoint %d\n", bitmap );
 	for (j=0; j < h; ++j) {
 		for (i=0; i < w; ++i)
 			putchar(" .:ioVM@"[bitmap[j*w+i]>>5]);
 		putchar('\n');
 	}
+
+	free( bitmap );
 
 	free( ttf_buffer );
 
