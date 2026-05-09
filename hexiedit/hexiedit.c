@@ -15,6 +15,10 @@ int down = 0;
 int slot = 0;
 int colorQueueLength = 50;
 uint32_t colorQueue[50];
+double timeOfLastSave = -1;
+float hexsize = 34;
+float hexmargin = 5;
+int suckColor;
 
 void LoadIndex();
 void SaveImage();
@@ -28,12 +32,20 @@ int HandleDestroy()
 void HandleKey( int keycode, int bDown )
 {
 //sprintf( cts, "slot: %02d n: next slot / p: previous slot / s: save", slot );
+
+	switch( keycode )
+	{
+		case 'd': case 'D': suckColor = bDown; break;
+		default: break;
+	}
+
 	if( bDown )
 	switch( keycode )
 	{
 		case 'p': case 'P': SaveImage(); slot--; if( slot < 0 ) slot = 99; LoadIndex(); break;
 		case 'n': case 'N': SaveImage(); slot++; if( slot>=99 ) slot = 0 ; LoadIndex(); break;
 		case 's': case 'S': SaveImage(); break;
+		case 'b': case 'B': colorQueue[0] = 0; break;
 	}
 }
 
@@ -75,9 +87,6 @@ void HandleMotion( int x, int y, int mask )
 int imgw;
 int imgh;
 uint32_t * colors;
-
-float hexsize = 34;
-float hexmargin = 5;
 
 
 typedef struct { float x, y; } hpoint;
@@ -208,7 +217,7 @@ void SaveImage()
 		saveimg[x+y*imgw] = 0xff000000 | (c>>24) | ((c>>8)&0xff00) | ((c<<8)&0xff0000);
 	}
 
-
+	timeOfLastSave = OGGetAbsoluteTime();
 	int ret = stbi_write_png( fname, imgw, imgh, 4, saveimg, imgw*4);
 	printf( "Save: %d\n", ret );
 }
@@ -272,9 +281,13 @@ void DrawHex( hpoint hp, hoffsetcoord hc )
 	if( hit )
 	{
 		if( down == 1 )
+		{
 			colors[hc.col + hc.row * imgw] = colorQueue[0];
-		else if( down == 2 )
-			colors[hc.col + hc.row * imgw] = 0;
+		}
+		else if( down == 2 || suckColor )
+		{
+			colorQueue[0] = colors[hc.col + hc.row * imgw];
+		}
 	}
 
 
@@ -290,11 +303,18 @@ void DrawHex( hpoint hp, hoffsetcoord hc )
 	CNFGTackSegment( pts[3].x, pts[3].y, pts[4].x, pts[4].y );
 	CNFGTackSegment( pts[4].x, pts[4].y, pts[5].x, pts[5].y );
 	CNFGTackSegment( pts[5].x, pts[5].y, pts[0].x, pts[0].y );
+
+	if( hit )
+	{
+		CNFGDialogColor = colorQueue[0];
+		CNFGDrawBox( hp.x-8, hp.y-8, hp.x+8, hp.y+8 );
+	}
 }
 
 int main()
 {
 	CNFGSetup( "Hexiedit", 1296, 1280 );
+	//CNFGSetupFullscreen( "Hexiedit", 1 );
 
 	srand( OGGetAbsoluteTime() );
 
@@ -310,6 +330,7 @@ int main()
 		CNFGGetDimensions( &wx, &wy );
 		CNFGBGColor = 0x101010FF;
 		CNFGClearFrame();
+		double now = OGGetAbsoluteTime();
 
 		int x, y;
 		for( y = 0; y < imgh; y++ )
@@ -324,10 +345,12 @@ int main()
 
 		int c = 0;
 		CNFGColor( 0 );
+		//CNFGDialogColor = colorQueue[0];
+		//CNFGDrawBox( 0, 0, colorQueueLength*40+1, 41 );
 		for( c = 0; c < colorQueueLength; c++ )
 		{
 			CNFGDialogColor = colorQueue[c];
-			CNFGDrawBox( c*40+1, 1, c*40+40, 40 );
+			CNFGDrawBox( c*40+3, 3, c*40+38, 38 );
 		}
 
 //		CNFGTackRectangle( xco+margin/2, yco+margin/2, xco+gsx, yco+gsy );
@@ -336,8 +359,18 @@ int main()
 		CNFGPenX = 1;
 		CNFGPenY = wy-15;
 		char cts[1024];
-		sprintf( cts, "slot: %02d n: next slot / p: previous slot / s: save / d: high res draw", slot );
+		sprintf( cts, "slot: %02d n: next slot / p: previous slot / s: save / d: dropper (pull color) / b: black", slot );
 		CNFGDrawText( cts, 3 );
+
+		double saveDtime = now - timeOfLastSave;		
+		if( saveDtime < 1 )
+		{
+			int sdt = (1.0-saveDtime)*255;
+			CNFGColor( (sdt<<24) | (sdt<<8) | (sdt<<16) | 0x000000ff );
+			CNFGPenX = 300;
+			CNFGPenY = 200;
+			CNFGDrawText( "Saved", 5 );
+		}
 		CNFGSwapBuffers();
 	}
 	return 0;
