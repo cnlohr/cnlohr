@@ -15,7 +15,7 @@ int down = 0;
 int slot = 0;
 int colorQueueLength = 50;
 uint32_t colorQueue[50];
-double timeOfLastSave = -1;
+double timeOfLastSave = -5;
 float hexsize = 34;
 float hexmargin = 5;
 int suckColor;
@@ -217,8 +217,15 @@ void SaveImage()
 		saveimg[x+y*imgw] = 0xff000000 | (c>>24) | ((c>>8)&0xff00) | ((c<<8)&0xff0000);
 	}
 
-	timeOfLastSave = OGGetAbsoluteTime();
 	int ret = stbi_write_png( fname, imgw, imgh, 4, saveimg, imgw*4);
+	if( ret == 1 )
+	{
+		timeOfLastSave = OGGetAbsoluteTime();
+	}
+	else
+	{
+		timeOfLastSave = -10;
+	}
 	printf( "Save: %d\n", ret );
 }
 
@@ -363,13 +370,20 @@ int main()
 		CNFGDrawText( cts, 3 );
 
 		double saveDtime = now - timeOfLastSave;		
-		if( saveDtime < 1 )
+		if( saveDtime < 3 )
 		{
-			int sdt = (1.0-saveDtime)*255;
+			int sdt = (3.0-saveDtime)/3.0*255;
 			CNFGColor( (sdt<<24) | (sdt<<8) | (sdt<<16) | 0x000000ff );
 			CNFGPenX = 300;
 			CNFGPenY = 200;
 			CNFGDrawText( "Saved", 5 );
+		}
+		if( timeOfLastSave < -9 )
+		{
+			CNFGColor( 0xff0000ff );
+			CNFGPenX = 300;
+			CNFGPenY = 200;
+			CNFGDrawText( "Not Saved", 5 );
 		}
 		CNFGSwapBuffers();
 	}
