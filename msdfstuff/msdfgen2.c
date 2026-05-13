@@ -14,13 +14,13 @@
 
 stbtt_fontinfo font;
 
-
-const int marginBig = 64;
+#define STARTSIZE 1024
+const int marginBig = 128;
 const float pxd = 0.01;
 const int downscale = 32;
 
 // Output channels.
-#define OCH 2
+#define OCH 3
 
 float ComputePixelError( int boole, int x, int y, float * sdfF, float * dsrgb, int w, int h, int ow, int oh )
 {
@@ -35,6 +35,9 @@ float ComputePixelError( int boole, int x, int y, float * sdfF, float * dsrgb, i
 		float realSdf = sdfF[usx+(downscale/2)+(usy+(downscale/2))*w];
 		float calcSdf = 0;
 		int ch = 0;
+		static_assert( OCH == 3 );
+		float o[3];
+
 		for( ch = 0; ch < OCH; ch++ )
 		{
 			// Linear scale-up, matching what the GPU would do.
@@ -44,10 +47,12 @@ float ComputePixelError( int boole, int x, int y, float * sdfF, float * dsrgb, i
 			float pp = dsrgb[(usx/downscale+1+(usy/downscale+1)*ow)*OCH+ch];
 			float vX0 = pn * alphX + nn * (1.0 - alphX);
 			float vX1 = pp * alphX + np * (1.0 - alphX);
-			float o = vX1 * alphY + vX0 * (1.0 - alphY);
-			if( o > calcSdf ) calcSdf = o;
+			o[ch] = vX1 * alphY + vX0 * (1.0 - alphY);
 		}
 
+		float median = fmaxf(fminf(o[0], o[1]), fminf(fmaxf(o[0], o[1]), o[2]));
+//printf( "%f [%f %f %f]\n", median, o[0], o[1], o[2] );
+		calcSdf = median;
 
 		float delta = (!boole) ? ((calcSdf - realSdf)) : ((calcSdf>0.5) - (realSdf>0.5));
 		err += delta * delta;
@@ -59,7 +64,7 @@ void WriteSDFTest( const char * filename, int ow, int oh, int w, int h, int down
 {
 	int usx, usy, x, y, r;
 	float err = 0;
-	uint8_t * sdfupscaletest = calloc( w * h, 1 );
+	uint8_t * sdfupscaletest = calloc( w * h, 3 );
 	for( y = 0; y < oh-1; y++ )
 	for( x = 0; x < ow-1; x++ )
 	for( usy = y * downscale - downscale + 1; usy < y * downscale + downscale; usy++ )
@@ -71,6 +76,10 @@ void WriteSDFTest( const char * filename, int ow, int oh, int w, int h, int down
 		float realSdf = sdfF[usx+(downscale/2)+(usy+(downscale/2))*w];
 		float calcSdf = 0;
 		int ch = 0;
+
+		static_assert( OCH == 3 );
+		float o[3];
+
 		for( ch = 0; ch < OCH; ch++ )
 		{
 			// Linear scale-up, matching what the GPU would do.
@@ -80,9 +89,12 @@ void WriteSDFTest( const char * filename, int ow, int oh, int w, int h, int down
 			float pp = dsrgb[(usx/downscale+1+(usy/downscale+1)*ow)*OCH+ch];
 			float vX0 = pn * alphX + nn * (1.0 - alphX);
 			float vX1 = pp * alphX + np * (1.0 - alphX);
-			float o = vX1 * alphY + vX0 * (1.0 - alphY);
-			if( o > calcSdf ) calcSdf = o;
+			o[ch] = vX1 * alphY + vX0 * (1.0 - alphY);
 		}
+
+		float median = fmaxf(fminf(o[0], o[1]), fminf(fmaxf(o[0], o[1]), o[2]));
+		calcSdf = median;
+
 		int uso = calcSdf * 255.5;
 		if( uso < 0 ) uso = 0;
 		if( uso > 255 ) uso = 255;
@@ -92,9 +104,11 @@ void WriteSDFTest( const char * filename, int ow, int oh, int w, int h, int down
 		if( py < 0 ) continue;
 		if( px >= w ) continue;
 		if( py >= h ) continue;
-		sdfupscaletest[usx+(downscale/2)+(usy+(downscale/2))*w] = uso;
+		sdfupscaletest[(usx+(downscale/2)+(usy+(downscale/2))*w)*3+0] = uso;
+		sdfupscaletest[(usx+(downscale/2)+(usy+(downscale/2))*w)*3+1] = (calcSdf>0.5)?255:0;
+		sdfupscaletest[(usx+(downscale/2)+(usy+(downscale/2))*w)*3+2] = uso;
 	}
-	r = stbi_write_png( filename, w, h, 1, sdfupscaletest, w);
+	r = stbi_write_png( filename, w, h, 3, sdfupscaletest, w*3);
 	if( !r )
 	{
 		fprintf( stderr, "Error: image failed to write.\n" );
@@ -123,7 +137,7 @@ int main()
 
 	int c = 'A';//L'は';//'c';
 
-	int size = 1024;
+	int size = STARTSIZE;
 
 	int offset = stbtt_GetFontOffsetForIndex(ttf_buffer, 0);
 	r = stbtt_InitFont(&font, ttf_buffer, offset);
@@ -280,50 +294,83 @@ int main()
 	// Optimize dsrgb over the operational space.
 	// Assume outermost edge of pixels should not be changed.
 	// this helps us frame the solution to prefer red channel.  << Probably untrue, but let's see how it goes.
+
+	for( y = 0; y < oh; y++ )
+	for( x = 0; x < ow; x++ )
+	{
+		dsrgb[(x+y*ow)*OCH+0] = 0;
+		//printf( "%f\n", dsrgb[(x+y*ow)*OCH+1] );
+		dsrgb[(x+y*ow)*OCH+2] = 1;
+	}
+
+dsrgb[(2+3*ow)*OCH+0] = 1;
+	
+
 	float origTot = 0;
 	float newTot = 0;
-	for( y = 1; y < oh-1; y++ )
-	for( x = 1; x < ow-1; x++ )
+	int phase = 0;
+	for( phase = 0; phase < 2; phase++ )
 	{
-		// Somehow tune pixel?
-
-		// this pixel can affect output pixels (x * downscale - downscale + 1) to (x * downscale + downscale - 1)
-		float bests[OCH];
-		int n;
-		for( n = 0; n < OCH; n++ )
-			bests[n] = dsrgb[(x+y*ow)*OCH+n];
-
-		float bestPE = ComputePixelError( 0, x, y, sdfF, dsrgb, w, h, ow, oh );
-		float origPE = bestPE;
-		int i;
-		for( i = 0; i < 1000; i++ )
+		for( y = 1; y < oh-2; y++ )
+		for( x = 1; x < ow-2; x++ )
 		{
-			float celeste = (1000-i)/30000.0;
+			// Somehow tune pixel?
+
+			// this pixel can affect output pixels (x * downscale - downscale + 1) to (x * downscale + downscale - 1)
+			float bests[OCH];
+			int n;
+			bests[0] = dsrgb[(x+y*ow)*OCH+0];
+			bests[1] = dsrgb[(x+y*ow)*OCH+1];
+			bests[2] = dsrgb[(x+y*ow)*OCH+2];
+
+			float bestPE = ComputePixelError( 0, x, y, sdfF, dsrgb, w, h, ow, oh );
+			float origPE = bestPE;
+			int i;
+			for( i = 0; i < 256; i++ )
+			{
+				if( phase == 0 )
+				{
+					dsrgb[0] = ((float)i)/256.0;
+				}
+				else if( phase == 1 )
+				{
+					dsrgb[2] = ((float)i)/256.0;
+				}
+			//	float celeste = (500-i)/300.0;
+			//	for( n = 0; n < OCH; n++ )
+			//	{
+			//		float new = bests[n] + ((rand()%10000)-5000)/5000.0f * celeste;
+			//		if( new < 0 ) new = 0; if( new > 1 ) new = 1;
+			//		dsrgb[(x+y*ow)*OCH+n] = new;
+			//	}
+
+				float PE = ComputePixelError( 0, x, y, sdfF, dsrgb, w, h, ow, oh );
+
+#if 0
+				printf( "%f %f %f -> PE:%f bestPE:%f [%f %f %f]\n", 
+					dsrgb[(x+y*ow)*OCH+0] - bests[0],
+					dsrgb[(x+y*ow)*OCH+1] - bests[1],
+					dsrgb[(x+y*ow)*OCH+2] - bests[2], PE, bestPE,
+					dsrgb[0], dsrgb[1], dsrgb[2]  );
+#endif
+				if( PE < bestPE )
+				{
+					for( n = 0; n < OCH; n++ )
+						bests[n] = dsrgb[(x+y*ow)*OCH+n];
+					bestPE = PE;
+				}
+			}
+			origTot += origPE;
+			newTot += bestPE;
 			for( n = 0; n < OCH; n++ )
-			{
-				float new = bests[n] + ((rand()%10000)-5000)/5000.0f * celeste;
-				if( new < 0 ) new = 0; if( new > 1 ) new = 1;
-				dsrgb[(x+y*ow)*OCH+n] = new;
-			}
+				dsrgb[(x+y*ow)*OCH+n] = bests[n];
 
-			float PE = ComputePixelError( 0, x, y, sdfF, dsrgb, w, h, ow, oh );
-//			printf( "%f %f %f -> %f %f\n", dsrgb[(x+y*ow)*OCH+0] - bestR, dsrgb[(x+y*ow)*OCH+1] - bestG, dsrgb[(x+y*ow)*OCH+2] - bestB, PE, bestPE );
-			if( PE < bestPE )
-			{
-				for( n = 0; n < OCH; n++ )
-					bests[n] = dsrgb[(x+y*ow)*OCH+n];
-				bestPE = PE;
-			}
 		}
-		origTot += origPE;
-		newTot += bestPE;
-		for( n = 0; n < OCH; n++ )
-			dsrgb[(x+y*ow)*OCH+n] = bests[n];
-
 	}
 
 	printf( "%f %f\n", origTot, newTot );
 // Make sure upscaling algo is right.
+
 	WriteSDFTest( "stage2-out.png", ow, oh, w, h, downscale, sdfF, dsrgb );
 
 	uint8_t * dsrgbo = calloc( ow * oh, 3 );
