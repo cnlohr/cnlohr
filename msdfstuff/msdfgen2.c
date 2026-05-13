@@ -14,7 +14,7 @@
 
 stbtt_fontinfo font;
 
-#define STARTSIZE 1024
+#define STARTSIZE 512
 const int marginBig = 128;
 const float pxd = 0.01;
 const int downscale = 32;
@@ -26,8 +26,10 @@ float ComputePixelError( int boole, int x, int y, float * sdfF, float * dsrgb, i
 {
 	int usx, usy;
 	float err = 0;
-	for( usy = y * downscale - downscale + 1; usy < y * downscale + downscale; usy++ )
-	for( usx = x * downscale - downscale + 1; usx < x * downscale + downscale; usx++ )
+	//for( usy = y * downscale - downscale + 1; usy < y * downscale + downscale; usy++ )
+	//for( usx = x * downscale - downscale + 1; usx < x * downscale + downscale; usx++ )
+	for( usx = 0; usx < w; usx++ )
+	for( usy = 0; usy < h; usy++ )
 	{
 		float alphX = (((float)(usx))/downscale - usx/downscale);
 		float alphY = (((float)(usy))/downscale - usy/downscale);
@@ -55,6 +57,7 @@ float ComputePixelError( int boole, int x, int y, float * sdfF, float * dsrgb, i
 		calcSdf = median;
 
 		float delta = (!boole) ? ((calcSdf - realSdf)) : ((calcSdf>0.5) - (realSdf>0.5));
+		//printf( "%f // %f\n", calcSdf, realSdf );
 		err += delta * delta;
 	}
 	return err;
@@ -121,8 +124,8 @@ int main()
 {
 	int r;
 
-	FILE * f = fopen( "wlmaru2004emojip.ttf", "rb" );
-	//FILE * f = fopen( "AudioLinkConsole-Bold.ttf", "rb" );
+	//FILE * f = fopen( "wlmaru2004emojip.ttf", "rb" );
+	FILE * f = fopen( "AudioLinkConsole-Bold.ttf", "rb" );
 	fseek( f, 0, SEEK_END );
 	int len = ftell( f );
 	fseek( f, 0, SEEK_SET );
@@ -237,7 +240,7 @@ int main()
 	{
 		float f = sdfF[x+y*w] / 2.0;
 		if( origf[x+y*w] >= 0.5 )
-			f += 0.5 -pxd;
+			f += 0.5 - pxd;
 		sdfF[x+y*w] = f;
 
 		int v = f * 255.5;
@@ -303,13 +306,14 @@ int main()
 		dsrgb[(x+y*ow)*OCH+2] = 1;
 	}
 
-dsrgb[(2+3*ow)*OCH+0] = 1;
+	//dsrgb[(2+3*ow)*OCH+0] = 1;
 	
 
 	float origTot = 0;
 	float newTot = 0;
 	int phase = 0;
-	for( phase = 0; phase < 2; phase++ )
+	//for( phase = 0; phase < 2; phase++ )
+	phase = 1;
 	{
 		for( y = 1; y < oh-2; y++ )
 		for( x = 1; x < ow-2; x++ )
@@ -323,18 +327,22 @@ dsrgb[(2+3*ow)*OCH+0] = 1;
 			bests[1] = dsrgb[(x+y*ow)*OCH+1];
 			bests[2] = dsrgb[(x+y*ow)*OCH+2];
 
-			float bestPE = ComputePixelError( 0, x, y, sdfF, dsrgb, w, h, ow, oh );
+			float bestPE = ComputePixelError( 1, x, y, sdfF, dsrgb, w, h, ow, oh );
 			float origPE = bestPE;
 			int i;
 			for( i = 0; i < 256; i++ )
 			{
 				if( phase == 0 )
 				{
-					dsrgb[0] = ((float)i)/256.0;
+					dsrgb[(x+y*ow)*OCH+0] = ((float)i)/256.0;
 				}
 				else if( phase == 1 )
 				{
-					dsrgb[2] = ((float)i)/256.0;
+					dsrgb[(x+y*ow)*OCH+1] = ((float)i)/256.0;
+				}
+				else if( phase == 2 )
+				{
+					dsrgb[(x+y*ow)*OCH+2] = ((float)i)/256.0;
 				}
 			//	float celeste = (500-i)/300.0;
 			//	for( n = 0; n < OCH; n++ )
@@ -344,8 +352,7 @@ dsrgb[(2+3*ow)*OCH+0] = 1;
 			//		dsrgb[(x+y*ow)*OCH+n] = new;
 			//	}
 
-				float PE = ComputePixelError( 0, x, y, sdfF, dsrgb, w, h, ow, oh );
-
+				float PE = ComputePixelError( 1, x, y, sdfF, dsrgb, w, h, ow, oh );
 #if 0
 				printf( "%f %f %f -> PE:%f bestPE:%f [%f %f %f]\n", 
 					dsrgb[(x+y*ow)*OCH+0] - bests[0],
@@ -360,6 +367,8 @@ dsrgb[(2+3*ow)*OCH+0] = 1;
 					bestPE = PE;
 				}
 			}
+			printf( "BPE( %f -- origPE %f,  %d %d (%f %f %f) )\n", bestPE, origPE, x, y, dsrgb[(x+y*ow)*OCH+0], dsrgb[(x+y*ow)*OCH+1], dsrgb[(x+y*ow)*OCH+2] );
+
 			origTot += origPE;
 			newTot += bestPE;
 			for( n = 0; n < OCH; n++ )
