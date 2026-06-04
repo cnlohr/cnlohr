@@ -71,6 +71,7 @@ While I cannot accept donations, favors or work at the moment, your money may go
 * iakat for their work on [adsb.lol](https://adsb.lol), and open ADSB platform. [Github Sponsorship](https://github.com/iakat)
 * Dooly123 for their continued work on [Basis](https://basisvr.org/), an open source VR social framework
 
+My patreon is strictly for my youtube videos.
 
 ## Sandbox testing:
 
