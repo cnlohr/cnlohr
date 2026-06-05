@@ -72,7 +72,7 @@ While I cannot accept donations, favors or work at the moment, your money may go
 * Dooly123 for their continued work on [Basis](https://basisvr.org/), an open source VR social framework
 * Liviu Ionescu for their work on X-Pack, making cross-compiling for platforms much easier. [Kofi Link](ko-fi.com/ilegeul)
 
-My patreon is strictly for my youtube videos.
+My patreon, here [Patreon](http://patreon.com/c/cnlohr) is strictly for my youtube videos.
 
 ## Sandbox testing:
 
