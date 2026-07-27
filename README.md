@@ -61,7 +61,7 @@ VR/Graphics
  * [<IMG SRC=http://cnvr.io/d/ghsai.cgi?cnlohr/openvr_overlay_model&6>openvr_overlay_model](https://github.com/cnlohr/openvr_overlay_model) - openvr stereo overlay example
  * [<IMG SRC=http://cnvr.io/d/ghsai.cgi?cnlohr/openvr-screengrab&6>openvr-screengrab](https://github.com/cnlohr/openvr-screengrab) - minimal example to create DirectX contexts in pure C and grab SteamVR screengrabs
  * [<IMG SRC=http://cnvr.io/d/ghsai.cgi?cnlohr/slapsplat&6>slapsplat](https://github.com/cnlohr/slapsplat) - VRChat-friendly Gaussian Splat renderer for VR, using ordinal sorting
- * [<IMG SRC=http://cnvr.io/d/ghsai.cgi?cnlohr/noeuclid&6>noeuclid](https://github.com/cnlohr/starcounter) - non-euclidean ray-tracing demo from my youtube, extremely efficient voxel tracing alogorithm
+ * [<IMG SRC=http://cnvr.io/d/ghsai.cgi?cnlohr/noeuclid&6>noeuclid](https://github.com/cnlohr/noeuclid) - non-euclidean ray-tracing demo from my youtube, extremely efficient voxel tracing alogorithm
 
 
 ## How to support
